@@ -16,9 +16,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: npm
-      - run: npm ci
+          node-version: 22
+      - run: npm install
       - run: npm run build
       - run: python3 -m http.server 4321 --directory dist &
       - run: npx wait-on http://localhost:4321 --timeout 15000
