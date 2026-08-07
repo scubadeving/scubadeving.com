@@ -9,6 +9,5 @@ node_modules/
 test-results/
 playwright-report/
 
-# Generated at build time by scripts/generate-assets.mjs
-public/og-*.png
-public/apple-touch-icon.png
+# Run `npm run generate` locally when design tokens or product names change
+# public/og-*.png and public/apple-touch-icon.png are committed as static assets
