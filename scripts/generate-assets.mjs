@@ -79,7 +79,7 @@ const images = [
     svg: ogSvg({
       label: "SOFTWARE STUDIO",
       name: "scubadeving",
-      tagline: "Software for serious divers",
+      tagline: "Built by divers, for divers.",
     }),
     file: "og-default.png",
     width: 1200,
