@@ -1,0 +1,153 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { products, statusLabel, statusColor } from "../data/products";
+
+export const getStaticPaths = (() => {
+  return products.map((product) => ({
+    params: { product: product.id },
+    props: { product },
+  }));
+}) satisfies GetStaticPaths;
+
+const { product } = Astro.props;
+const otherProducts = products.filter((p) => p.id !== product.id);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: product.name,
+  description: product.heroDescription,
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "Android",
+  author: {
+    "@type": "Organization",
+    name: "scubadeving",
+    url: "https://scubadeving.com",
+  },
+};
+---
+
+<Layout
+  title={`${product.name} — ${product.tagline}`}
+  description={product.heroDescription}
+  ogImage={`/og-${product.id}.png`}
+  jsonLd={jsonLd}
+>
+  <div class="mx-auto max-w-4xl px-6 py-24">
+
+    <Header showBack={true} />
+
+    <main>
+    <section class="mb-24">
+      {product.appIcon && (
+        <img
+          src={product.appIcon}
+          alt={`${product.name} app icon`}
+          width="80"
+          height="80"
+          class="mb-6 rounded-[18px]"
+        />
+      )}
+      <div class="flex flex-wrap items-center gap-3">
+        <h1 class="font-mono text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+          {product.name}
+        </h1>
+        <span
+          class={`rounded-full border px-2.5 py-0.5 text-xs font-medium ${statusColor[product.status]}`}
+        >
+          {statusLabel[product.status]}
+        </span>
+      </div>
+      <p class="mt-4 max-w-xl text-lg leading-relaxed text-ink-muted">
+        {product.heroDescription}
+      </p>
+      <p class="mt-6 text-sm text-ink-muted">{product.platform}</p>
+    </section>
+
+    <section class="mb-24">
+      <h2 class="mb-8 text-xs font-medium uppercase tracking-widest text-ink-muted">
+        Features
+      </h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {
+          product.features.map((feature) => (
+            <div class="border-l-2 pl-4" style={`border-color: ${product.brandColor}`}>
+              <h3 class="text-sm font-medium text-ink">{feature.title}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-ink-muted">
+                {feature.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    {
+      product.notice && (
+        <div class="mb-24 rounded-2xl border border-surface-border bg-surface-raised p-5">
+          <p class="text-xs leading-relaxed text-ink-muted">
+            <span class="font-medium text-ink">Life support notice:</span>{" "}
+            {product.notice}
+          </p>
+        </div>
+      )
+    }
+
+    <section class="mb-12">
+      <div class="rounded-2xl border border-surface-border bg-surface-raised p-6">
+        <h2 class="text-sm font-medium text-ink">{product.cta.heading}</h2>
+        <p class="mt-2 text-sm leading-relaxed text-ink-muted">{product.cta.body}</p>
+        <div class="mt-4 flex flex-wrap items-center gap-6">
+          <a
+            href={`mailto:hello@scubadeving.com?subject=${encodeURIComponent(product.cta.emailSubject)}`}
+            class="rounded text-sm font-medium text-accent hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            {product.cta.label} <span aria-hidden="true">→</span>
+          </a>
+          <a
+            href="https://discord.gg/faFEbYZtX"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded text-sm font-medium text-ink-muted hover:text-ink hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            Join the community <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {
+      otherProducts.length > 0 && (
+        <section class="mb-12">
+          <h2 class="mb-4 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            Also from scubadeving
+          </h2>
+          {otherProducts.map((other) => (
+            <a
+              href={`/${other.id}`}
+              class="group flex items-center justify-between rounded-2xl border border-surface-border bg-surface-raised p-5 transition-colors hover:border-accent/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              <div>
+                <p class="font-mono text-sm font-medium text-ink">{other.name}</p>
+                <p class="mt-0.5 text-xs text-ink-muted">{other.tagline}</p>
+              </div>
+              <span
+                class="text-xs text-accent opacity-0 transition-opacity group-hover:opacity-100"
+                aria-hidden="true"
+              >
+                View →
+              </span>
+            </a>
+          ))}
+        </section>
+      )
+    }
+    </main>
+
+    <Footer />
+
+  </div>
+</Layout>

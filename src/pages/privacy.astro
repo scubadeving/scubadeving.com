@@ -1,0 +1,77 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+  title="Privacy Policy — scubadeving"
+  description="Privacy policy for scubadeving.com and scubadeving mobile applications."
+  ogImage="/og-default.png"
+>
+  <div class="mx-auto max-w-4xl px-6 py-24">
+
+    <Header showBack={true} />
+
+    <main>
+    <section class="mb-16">
+      <h1 class="text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+        Privacy Policy
+      </h1>
+      <p class="mt-4 text-sm text-ink-muted">Last updated: August 2026</p>
+    </section>
+
+    <div class="mb-24 space-y-12">
+
+      <section>
+        <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          This website
+        </h2>
+        <p class="text-sm leading-relaxed text-ink-muted">
+          scubadeving.com does not use cookies, tracking pixels, or third-party analytics.
+          No personal information is collected when you visit this site.
+        </p>
+        <p class="mt-3 text-sm leading-relaxed text-ink-muted">
+          If you contact us by email, your message and address are used only to respond to
+          your inquiry and are not shared with third parties.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          Mobile applications
+        </h2>
+        <p class="text-sm leading-relaxed text-ink-muted">
+          LoopLogic and HydroVault are designed to keep all data on your device. Neither app
+          requires an account, transmits personal data to external servers, or includes
+          third-party advertising or analytics SDKs.
+        </p>
+        <p class="mt-3 text-sm leading-relaxed text-ink-muted">
+          All data you enter — dive logs, cylinder records, checklist results — is stored
+          locally on your device and remains under your control. Uninstalling the app
+          removes all stored data.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          Contact
+        </h2>
+        <p class="text-sm leading-relaxed text-ink-muted">
+          For privacy questions or data requests, contact us at{" "}
+          <a
+            href="mailto:hello@scubadeving.com"
+            class="rounded underline text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            hello@scubadeving.com
+          </a>.
+        </p>
+      </section>
+
+    </div>
+    </main>
+
+    <Footer />
+
+  </div>
+</Layout>

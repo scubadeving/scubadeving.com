@@ -1,29 +1,67 @@
 ---
+import "../styles/global.css";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
+
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown>;
+  noIndex?: boolean;
 }
 
 const {
-  title = "scubadeving — independent software studio",
-  description = "Independent software studio building tools for divers and beyond.",
+  title = "scubadeving — software for serious divers",
+  description = "Independent studio building focused tools for the technical diving community.",
+  ogImage,
+  jsonLd,
+  noIndex = false,
 } = Astro.props;
+
+// OG image must be an absolute URL for crawlers (Twitter, Facebook, iMessage, etc.)
+const ogImageUrl = ogImage
+  ? new URL(ogImage, Astro.site ?? Astro.url.origin).toString()
+  : undefined;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <title>{title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <title>{title}</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#0a0a0a" />
+    <link rel="canonical" href={Astro.url.href} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="scubadeving" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url.href} />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    {ogImageUrl && <meta property="og:image:alt" content={title} />}
+    {ogImageUrl && <meta property="og:image:width" content="1200" />}
+    {ogImageUrl && <meta property="og:image:height" content="630" />}
+
+    <meta name="twitter:card" content={ogImageUrl ? "summary_large_image" : "summary"} />
+    <meta name="twitter:site" content="@scubadeving" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+    {ogImageUrl && <meta name="twitter:image:alt" content={title} />}
+
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body class="bg-surface text-ink antialiased">
     <slot />

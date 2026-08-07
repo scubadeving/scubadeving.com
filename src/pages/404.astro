@@ -1,0 +1,37 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+  title="Page not found — scubadeving"
+  description="The page you're looking for doesn't exist."
+  noIndex={true}
+>
+  <div class="mx-auto max-w-4xl px-6 py-24">
+
+    <Header showBack={true} />
+
+    <main>
+    <section class="mb-24">
+      <span class="font-mono text-sm text-ink-muted">404</span>
+      <h1 class="mt-2 text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+        Page not found.
+      </h1>
+      <p class="mt-4 max-w-sm text-lg leading-relaxed text-ink-muted">
+        This page doesn't exist or has moved.
+      </p>
+      <a
+        href="/"
+        class="mt-8 inline-block rounded text-sm font-medium text-accent hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      >
+        <span aria-hidden="true">← </span>Back to home
+      </a>
+    </section>
+    </main>
+
+    <Footer />
+
+  </div>
+</Layout>

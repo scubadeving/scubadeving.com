@@ -1,0 +1,29 @@
+---
+interface Props {
+  showBack?: boolean;
+}
+
+const { showBack = false } = Astro.props;
+---
+
+<header class="mb-24">
+  <img src="/wordmark.png" alt="scubadeving" height="56" class="h-14 w-auto invert" />
+  <nav class="mt-2 flex gap-6">
+    {
+      showBack && (
+        <a
+          href="/"
+          class="rounded text-xs text-ink-muted transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          <span aria-hidden="true">← </span>All products
+        </a>
+      )
+    }
+    <a
+      href="mailto:hello@scubadeving.com"
+      class="rounded text-xs text-ink-muted transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
+      Contact
+    </a>
+  </nav>
+</header>

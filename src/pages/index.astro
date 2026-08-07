@@ -1,58 +1,68 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { products } from "../data/products";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "scubadeving",
+  url: "https://scubadeving.com",
+  sameAs: [
+    "https://github.com/scubadeving",
+    "https://x.com/scubadeving",
+    "https://instagram.com/scubadeving",
+    "https://youtube.com/@scubadeving",
+    "https://bsky.app/profile/scubadeving.bsky.social",
+  ],
+};
 ---
 
-<Layout>
+<Layout
+  title="scubadeving — software for serious divers"
+  description="Independent studio building software and hardware for the technical diving community. LoopLogic and HydroVault — tools built by divers, for divers."
+  ogImage="/og-default.png"
+  jsonLd={jsonLd}
+>
   <div class="mx-auto max-w-4xl px-6 py-24">
 
-    <!-- Header -->
-    <header class="mb-24">
-      <span class="font-mono text-sm text-ink-muted">scubadeving</span>
-      <nav class="mt-2 flex gap-6">
-        <a href="mailto:hello@scubadeving.com" class="text-xs text-ink-muted hover:text-ink transition-colors">Contact</a>
-      </nav>
-    </header>
+    <Header />
 
-    <!-- Hero -->
-    <section class="mb-24">
-      <h1 class="text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
-        Independent software studio.
-      </h1>
-      <p class="mt-4 max-w-xl text-lg leading-relaxed text-ink-muted">
-        Building focused tools for people who take their craft seriously.
-      </p>
-    </section>
+    <main>
+      <section class="mb-24">
+        <h1 class="text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+          Software for serious divers.
+        </h1>
+        <p class="mt-4 max-w-xl text-lg leading-relaxed text-ink-muted">
+          Independent studio building software and hardware for the technical diving community.
+        </p>
+      </section>
 
-    <!-- Products -->
-    <section>
-      <h2 class="mb-6 text-xs font-medium uppercase tracking-widest text-ink-muted">
-        Products
-      </h2>
-      <div class="grid gap-4 sm:grid-cols-2">
-        <ProductCard
-          name="HydroVault"
-          tagline="Scuba cylinder management"
-          description="Track hydrostatic tests, VIP inspections, and service history for your scuba cylinders. Built for divers who maintain their own gear."
-          status="in-development"
-          platform="Android · iOS coming soon"
-        />
-        <ProductCard
-          name="LoopLogic"
-          tagline="Rebreather dive logging"
-          description="Purpose-built dive logging for closed-circuit rebreather divers. Calibration records, setpoint history, and gas analysis in one place."
-          status="coming-soon"
-          platform="Android · iOS"
-        />
-      </div>
-    </section>
+      <section class="mb-24">
+        <h2 class="mb-6 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          Products
+        </h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {
+            products.map((product) => (
+              <ProductCard
+                name={product.name}
+                tagline={product.tagline}
+                description={product.cardDescription}
+                status={product.status}
+                platform={product.platform}
+                href={`/${product.id}`}
+                appIcon={product.appIcon}
+              />
+            ))
+          }
+        </div>
+      </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="mt-24 border-t border-surface-border pt-8">
-      <p class="text-xs text-ink-muted">
-        © {new Date().getFullYear()} scubadeving. All rights reserved.
-      </p>
-    </footer>
+    <Footer />
 
   </div>
 </Layout>

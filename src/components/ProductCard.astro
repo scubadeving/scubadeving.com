@@ -1,35 +1,42 @@
 ---
+import { statusLabel, statusColor } from "../data/products";
+import type { ProductStatus } from "../data/products";
+
 interface Props {
   name: string;
   tagline: string;
   description: string;
-  status: "in-development" | "coming-soon" | "available";
+  status: ProductStatus;
   platform?: string;
   href?: string;
+  appIcon?: string;
 }
 
-const { name, tagline, description, status, platform, href } = Astro.props;
+const { name, tagline, description, status, platform, href, appIcon } = Astro.props;
 
-const statusLabel: Record<Props["status"], string> = {
-  "in-development": "In development",
-  "coming-soon": "Coming soon",
-  available: "Available",
-};
-
-const statusColor: Record<Props["status"], string> = {
-  "in-development": "text-amber-400 bg-amber-400/10 border-amber-400/20",
-  "coming-soon": "text-ink-muted bg-surface-border/50 border-surface-border",
-  available: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
-};
+const Tag = href ? "a" : "div";
 ---
 
-<div
-  class="group relative flex flex-col gap-4 rounded-2xl border border-surface-border bg-surface-raised p-6 transition-colors hover:border-accent/30"
+<Tag
+  class="group flex flex-col gap-4 rounded-2xl border border-surface-border bg-surface-raised p-6 transition-colors hover:border-accent/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+  href={href}
 >
   <div class="flex items-start justify-between gap-4">
-    <div>
-      <h3 class="font-mono text-lg font-medium text-ink">{name}</h3>
-      <p class="mt-0.5 text-sm text-ink-muted">{tagline}</p>
+    <div class="flex items-start gap-3">
+      {appIcon && (
+        <img
+          src={appIcon}
+          alt={`${name} app icon`}
+          width="48"
+          height="48"
+          loading="lazy"
+          class="shrink-0 rounded-xl"
+        />
+      )}
+      <div>
+        <h3 class="font-mono text-lg font-medium text-ink">{name}</h3>
+        <p class="mt-0.5 text-sm text-ink-muted">{tagline}</p>
+      </div>
     </div>
     <span
       class={`shrink-0 rounded-full border px-2.5 py-0.5 text-xs font-medium ${statusColor[status]}`}
@@ -41,16 +48,13 @@ const statusColor: Record<Props["status"], string> = {
   <p class="text-sm leading-relaxed text-ink-muted">{description}</p>
 
   <div class="mt-auto flex items-center justify-between">
-    {platform && <span class="text-xs text-ink-muted/60">{platform}</span>}
+    {platform && <span class="text-xs text-ink-muted">{platform}</span>}
     {
       href && (
-        <a
-          href={href}
-          class="ml-auto text-xs font-medium text-accent hover:underline"
-        >
-          Learn more →
-        </a>
+        <span class="ml-auto text-xs font-medium text-accent group-hover:underline">
+          Learn more <span aria-hidden="true">→</span>
+        </span>
       )
     }
   </div>
-</div>
+</Tag>

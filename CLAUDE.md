@@ -48,7 +48,7 @@ npm run preview  # preview built output
 
 ## Sibling projects
 
-- **HydroVault** — `~/Projects/sd/HydroVault` (Android, Kotlin/Compose)
-- **LoopLogic** — `~/Projects/sd/LoopLogic` (Android, Kotlin/Compose)
+- **LoopLogic** — `~/Projects/sd/LoopLogic` (Android, Kotlin/Compose) — `in-development`, approaching alpha/beta
+- **HydroVault** — `~/Projects/sd/HydroVault` (Android, Kotlin/Compose) — `in-development`, early stage
 
-Both appear as product cards on the homepage. Keep descriptions and status in sync with actual shipping state.
+Both appear as product cards on the homepage. LoopLogic is listed first (further along). Keep descriptions and status in sync with actual shipping state.

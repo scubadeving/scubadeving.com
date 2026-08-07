@@ -1,6 +1,14 @@
 dist/
 node_modules/
+.idea/
 .env
 .env.*
 !.env.example
 .DS_Store
+.astro/
+test-results/
+playwright-report/
+
+# Generated at build time by scripts/generate-assets.mjs
+public/og-*.png
+public/apple-touch-icon.png
