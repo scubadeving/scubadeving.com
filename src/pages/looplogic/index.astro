@@ -1,0 +1,319 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import { products, statusLabel, statusColor } from "../../data/products";
+import { discordUrl } from "../../data/site";
+
+const product = products.find((p) => p.id === "looplogic")!;
+const otherProducts = products.filter((p) => p.id !== "looplogic");
+
+const supportedUnits = [
+  "Sidewinder",
+  "JJ-CCR",
+  "rEvo",
+  "AP Inspiration / Vision",
+  "KISS Classic",
+  "Hollis Explorer",
+  "More via CSV import",
+];
+
+const milestones = [
+  {
+    label: "Core features shipped",
+    detail: "Checklists, cell analytics, scrubber tracking, and dashboard all complete.",
+  },
+  {
+    label: "Dive authorization engine",
+    detail: "Real-time go/no-go status derived from cell health and checklist state.",
+  },
+  {
+    label: "Accessibility audit complete",
+    detail: "Full TalkBack support across all screens — usable with gloves or in low visibility.",
+  },
+  {
+    label: "98% test coverage enforced",
+    detail: "CI quality gate runs on every push. No regressions ship without detection.",
+  },
+  {
+    label: "KMP foundation in place",
+    detail: "Platform abstraction layer laid for future iOS and web targets.",
+  },
+];
+
+const roadmap = [
+  {
+    title: "Bühlmann deco engine",
+    detail: "ZHL-16C decompression model with configurable Gradient Factors.",
+  },
+  {
+    title: "Gas math calculators",
+    detail: "CNS, OTU, and Best Mix based on target setpoint.",
+  },
+  {
+    title: "Dive-deck UI mode",
+    detail: "High-contrast, glove-friendly interface optimised for use at the water's edge.",
+  },
+  {
+    title: "iOS & more",
+    detail: "KMP groundwork is done — non-Android targets are the next platform milestone.",
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: product.name,
+  description: product.heroDescription,
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "Android",
+  author: {
+    "@type": "Organization",
+    name: "scubadeving",
+    url: "https://scubadeving.com",
+  },
+};
+---
+
+<Layout
+  title="LoopLogic — CCR operations & analytics"
+  description="Purpose-built for closed-circuit rebreather divers. Pre-dive checklists, O₂ cell analytics, and scrubber tracking — offline-first, on Android."
+  ogImage="/og-looplogic.png"
+  jsonLd={jsonLd}
+>
+  <div class="mx-auto max-w-4xl px-6 py-24">
+
+    <Header showBack={true} />
+
+    <main>
+
+      <!-- Hero -->
+      <section class="mb-20">
+        <div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+          {product.appIcon && (
+            <img
+              src={product.appIcon}
+              alt="LoopLogic app icon"
+              width="96"
+              height="96"
+              class="shrink-0 rounded-[22px] shadow-lg"
+            />
+          )}
+          <div>
+            <div class="flex flex-wrap items-center gap-3">
+              <h1 class="font-mono text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+                LoopLogic
+              </h1>
+              <span class={`rounded-full border px-2.5 py-0.5 text-xs font-medium ${statusColor[product.status]}`}>
+                {statusLabel[product.status]}
+              </span>
+            </div>
+            <p class="mt-2 text-lg font-medium text-ink-muted">{product.tagline}</p>
+            <p class="mt-4 max-w-xl text-base leading-relaxed text-ink-muted">
+              {product.heroDescription}
+            </p>
+            <div class="mt-6 flex flex-wrap items-center gap-4">
+              <a
+                href={`mailto:beta@scubadeving.com?subject=${encodeURIComponent(product.cta.emailSubject)}`}
+                class="inline-flex items-center rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                {product.cta.label} <span aria-hidden="true" class="ml-1.5">→</span>
+              </a>
+              <a
+                href={discordUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-ink-muted transition-colors hover:text-ink hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                Join the community
+              </a>
+            </div>
+            <p class="mt-4 text-xs text-ink-muted">{product.platform}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Screenshot strip (placeholder) -->
+      <section class="mb-20">
+        <div class="flex gap-4 overflow-x-auto pb-2">
+          {[1, 2, 3].map(() => (
+            <div class="flex h-[480px] w-[220px] shrink-0 items-center justify-center rounded-2xl border border-surface-border bg-surface-raised text-xs text-ink-muted">
+              screenshot
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Who it's for -->
+      <section class="mb-20">
+        <div class="rounded-2xl border border-surface-border bg-surface-raised p-6">
+          <p class="text-xs font-medium uppercase tracking-widest text-ink-muted">Who it's for</p>
+          <p class="mt-3 text-base leading-relaxed text-ink">
+            CCR divers who are done duct-taping spreadsheets and paper logs together.
+          </p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-muted">
+            If you're running a Sidewinder, JJ-CCR, rEvo, AP, or any other unit and want a single offline-first
+            place to verify your gear, track cell health over time, and know your scrubber state before every
+            dive — this is built for you.
+          </p>
+        </div>
+      </section>
+
+      <!-- Supported units -->
+      <section class="mb-20">
+        <h2 class="mb-4 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          Supported units
+        </h2>
+        <div class="flex flex-wrap gap-2">
+          {supportedUnits.map((unit) => (
+            <span class="rounded-full border border-surface-border bg-surface-raised px-3 py-1 text-xs text-ink-muted">
+              {unit}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section class="mb-20">
+        <h2 class="mb-8 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          What's inside
+        </h2>
+        <div class="grid gap-6 sm:grid-cols-2">
+          {product.features.map((feature) => (
+            <div class="border-l-2 pl-4" style={`border-color: ${product.brandColor}`}>
+              <h3 class="text-sm font-medium text-ink">{feature.title}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-ink-muted">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Trust signals: offline-first -->
+      <section class="mb-20">
+        <div class="grid gap-3 sm:grid-cols-3">
+          {[
+            { label: "No account required", detail: "Nothing to sign up for. Open the app and start logging." },
+            { label: "Offline-first", detail: "All data stays on your device. Works on the dive deck with zero signal." },
+            { label: "Quality gates enforced", detail: "98% test coverage required. Spotless, Detekt, and lint run on every push — nothing ships broken." },
+          ].map((item) => (
+            <div class="rounded-2xl border border-surface-border bg-surface-raised p-4">
+              <p class="text-sm font-medium text-ink">{item.label}</p>
+              <p class="mt-1 text-xs leading-relaxed text-ink-muted">{item.detail}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Dev progress -->
+      <section class="mb-20">
+        <h2 class="mb-6 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          Development progress
+        </h2>
+        <div class="space-y-4">
+          {milestones.map((m) => (
+            <div class="flex items-start gap-3">
+              <span class="mt-0.5 shrink-0 text-[10px]" style={`color: ${product.brandColor}`}>✓</span>
+              <div>
+                <p class="text-sm font-medium text-ink">{m.label}</p>
+                <p class="mt-0.5 text-xs leading-relaxed text-ink-muted">{m.detail}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Roadmap -->
+      <section class="mb-20">
+        <h2 class="mb-6 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          Up next
+        </h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {roadmap.map((item) => (
+            <div class="rounded-2xl border border-surface-border bg-surface-raised p-4">
+              <p class="text-sm font-medium text-ink">{item.title}</p>
+              <p class="mt-1 text-xs leading-relaxed text-ink-muted">{item.detail}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Life support notice -->
+      {product.notice && (
+        <div class="mb-20 rounded-2xl border border-surface-border bg-surface-raised p-5">
+          <p class="text-xs leading-relaxed text-ink-muted">
+            <span class="font-medium text-ink">Life support notice:</span>{" "}
+            {product.notice}
+          </p>
+        </div>
+      )}
+
+      <!-- Beta CTA -->
+      <section class="mb-12">
+        <div class="rounded-2xl border border-surface-border bg-surface-raised p-6">
+          <h2 class="text-sm font-medium text-ink">{product.cta.heading}</h2>
+          <p class="mt-2 text-sm leading-relaxed text-ink-muted">{product.cta.body}</p>
+          <div class="mt-4 flex flex-wrap items-center gap-6">
+            <a
+              href={`mailto:beta@scubadeving.com?subject=${encodeURIComponent(product.cta.emailSubject)}`}
+              class="rounded text-sm font-medium text-accent hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              {product.cta.label} <span aria-hidden="true">→</span>
+            </a>
+            <a
+              href={discordUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded text-sm font-medium text-ink-muted hover:text-ink hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              Join the community <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Legal links -->
+      <div class="mb-12 flex flex-wrap gap-x-4 gap-y-1">
+        {[
+          { label: "Privacy", href: "/looplogic/privacy" },
+          { label: "Terms", href: "/looplogic/terms" },
+          { label: "Support", href: "/looplogic/support" },
+          { label: "Changelog", href: "/looplogic/changelog" },
+        ].map((link) => (
+          <a
+            href={link.href}
+            class="text-xs text-ink-muted transition-colors hover:text-ink hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Also from scubadeving -->
+      {otherProducts.length > 0 && (
+        <section class="mb-12">
+          <h2 class="mb-4 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            Also from scubadeving
+          </h2>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {otherProducts.map((other) => (
+              <ProductCard
+                name={other.name}
+                tagline={other.tagline}
+                description={other.cardDescription}
+                status={other.status}
+                platform={other.platform}
+                href={`/${other.id}`}
+                appIcon={other.appIcon}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+    </main>
+
+    <Footer />
+
+  </div>
+</Layout>

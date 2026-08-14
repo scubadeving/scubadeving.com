@@ -1,0 +1,306 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import { products, statusLabel, statusColor } from "../../data/products";
+import { discordUrl } from "../../data/site";
+
+const product = products.find((p) => p.id === "hydrovault")!;
+const otherProducts = products.filter((p) => p.id !== "hydrovault");
+
+const standards = [
+  { label: "DOT (US/NA)", detail: "12-month VIP cycle. SP 14743 SCBA/SCUBA exemptions." },
+  { label: "EN 1975 (EU)", detail: "Aluminium alloy cylinders. 30-month inspection interval." },
+  { label: "EN 1964 (EU)", detail: "Steel cylinders. 30-month inspection interval." },
+  { label: "CGA C-1", detail: "Methods for hydrostatic testing per CGA standard." },
+];
+
+const milestones = [
+  {
+    label: "Core data model built",
+    detail: "ScubaCylinder, ServiceLogEntry, and all domain entities in pure Kotlin — no Android dependencies.",
+  },
+  {
+    label: "Cylinder management screens",
+    detail: "List, detail, and form screens with ViewModels complete.",
+  },
+  {
+    label: "SQLDelight persistence",
+    detail: "Type-safe local database. All records stored offline with no cloud dependency.",
+  },
+  {
+    label: "KMP-ready from day one",
+    detail: "Architecture designed for Kotlin Multiplatform — adding iOS or web requires no domain rewrites.",
+  },
+  {
+    label: "CI pipeline running",
+    detail: "Build, test, and code-quality jobs run in parallel on every push via GitHub Actions.",
+  },
+];
+
+const roadmap = [
+  {
+    title: "Expiry notifications",
+    detail: "Push alerts before hydro or VIP certificates expire — no manual calendar reminders.",
+  },
+  {
+    title: "Import & export",
+    detail: "Bring your existing cylinder records in via CSV, and export them back out.",
+  },
+  {
+    title: "Fleet management",
+    detail: "Multi-cylinder tracking for dive shops, instructors, and technical divers with large inventories.",
+  },
+  {
+    title: "iOS & more",
+    detail: "Pure-Kotlin domain from the start — non-Android targets are a planned platform milestone.",
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: product.name,
+  description: product.heroDescription,
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "Android",
+  author: {
+    "@type": "Organization",
+    name: "scubadeving",
+    url: "https://scubadeving.com",
+  },
+};
+---
+
+<Layout
+  title="HydroVault — scuba cylinder management"
+  description="Track hydrostatic tests, VIP inspections, and O₂ service records for your scuba cylinders. Automatic expiry alerts, offline-first, on Android."
+  ogImage="/og-hydrovault.png"
+  jsonLd={jsonLd}
+>
+  <div class="mx-auto max-w-4xl px-6 py-24">
+
+    <Header showBack={true} />
+
+    <main>
+
+      <!-- Hero -->
+      <section class="mb-20">
+        <div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+          {product.appIcon && (
+            <img
+              src={product.appIcon}
+              alt="HydroVault app icon"
+              width="96"
+              height="96"
+              class="shrink-0 rounded-[22px] shadow-lg"
+            />
+          )}
+          <div>
+            <div class="flex flex-wrap items-center gap-3">
+              <h1 class="font-mono text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+                HydroVault
+              </h1>
+              <span class={`rounded-full border px-2.5 py-0.5 text-xs font-medium ${statusColor[product.status]}`}>
+                {statusLabel[product.status]}
+              </span>
+            </div>
+            <p class="mt-2 text-lg font-medium text-ink-muted">{product.tagline}</p>
+            <p class="mt-4 max-w-xl text-base leading-relaxed text-ink-muted">
+              {product.heroDescription}
+            </p>
+            <div class="mt-6 flex flex-wrap items-center gap-4">
+              <a
+                href={`mailto:beta@scubadeving.com?subject=${encodeURIComponent(product.cta.emailSubject)}`}
+                class="inline-flex items-center rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                {product.cta.label} <span aria-hidden="true" class="ml-1.5">→</span>
+              </a>
+              <a
+                href={discordUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-ink-muted transition-colors hover:text-ink hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                Join the community
+              </a>
+            </div>
+            <p class="mt-4 text-xs text-ink-muted">{product.platform}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Screenshot strip (placeholder) -->
+      <section class="mb-20">
+        <div class="flex gap-4 overflow-x-auto pb-2">
+          {[1, 2, 3].map(() => (
+            <div class="flex h-[480px] w-[220px] shrink-0 items-center justify-center rounded-2xl border border-surface-border bg-surface-raised text-xs text-ink-muted">
+              screenshot
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Who it's for -->
+      <section class="mb-20">
+        <div class="rounded-2xl border border-surface-border bg-surface-raised p-6">
+          <p class="text-xs font-medium uppercase tracking-widest text-ink-muted">Who it's for</p>
+          <p class="mt-3 text-base leading-relaxed text-ink">
+            Divers who own their gear and are done tracking inspections in a notes app.
+          </p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-muted">
+            Whether you're a recreational diver with a single AL80 or a technical diver managing
+            a stage rack, HydroVault keeps your hydro dates, VIP history, and O₂ service records
+            in one place — with automatic alerts before anything expires.
+          </p>
+        </div>
+      </section>
+
+      <!-- Supported standards -->
+      <section class="mb-20">
+        <h2 class="mb-4 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          Supported standards
+        </h2>
+        <div class="grid gap-3 sm:grid-cols-2">
+          {standards.map((s) => (
+            <div class="rounded-2xl border border-surface-border bg-surface-raised p-4">
+              <p class="text-sm font-medium text-ink">{s.label}</p>
+              <p class="mt-1 text-xs leading-relaxed text-ink-muted">{s.detail}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section class="mb-20">
+        <h2 class="mb-8 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          What's inside
+        </h2>
+        <div class="grid gap-6 sm:grid-cols-2">
+          {product.features.map((feature) => (
+            <div class="border-l-2 pl-4" style={`border-color: ${product.brandColor}`}>
+              <h3 class="text-sm font-medium text-ink">{feature.title}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-ink-muted">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Trust signals -->
+      <section class="mb-20">
+        <div class="grid gap-3 sm:grid-cols-3">
+          {[
+            { label: "No account required", detail: "Nothing to sign up for. Open the app and start logging your cylinders." },
+            { label: "Offline-first", detail: "All records stay on your device. No cloud, no subscription, no data risk." },
+            { label: "Regulatory specs built in", detail: "Inspection intervals derived from DOT and EN standards — not manual input." },
+          ].map((item) => (
+            <div class="rounded-2xl border border-surface-border bg-surface-raised p-4">
+              <p class="text-sm font-medium text-ink">{item.label}</p>
+              <p class="mt-1 text-xs leading-relaxed text-ink-muted">{item.detail}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Dev progress -->
+      <section class="mb-20">
+        <h2 class="mb-6 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          Development progress
+        </h2>
+        <div class="space-y-4">
+          {milestones.map((m) => (
+            <div class="flex items-start gap-3">
+              <span class="mt-0.5 shrink-0 text-[10px]" style={`color: ${product.brandColor}`}>✓</span>
+              <div>
+                <p class="text-sm font-medium text-ink">{m.label}</p>
+                <p class="mt-0.5 text-xs leading-relaxed text-ink-muted">{m.detail}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Roadmap -->
+      <section class="mb-20">
+        <h2 class="mb-6 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          Up next
+        </h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {roadmap.map((item) => (
+            <div class="rounded-2xl border border-surface-border bg-surface-raised p-4">
+              <p class="text-sm font-medium text-ink">{item.title}</p>
+              <p class="mt-1 text-xs leading-relaxed text-ink-muted">{item.detail}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="mb-12">
+        <div class="rounded-2xl border border-surface-border bg-surface-raised p-6">
+          <h2 class="text-sm font-medium text-ink">{product.cta.heading}</h2>
+          <p class="mt-2 text-sm leading-relaxed text-ink-muted">{product.cta.body}</p>
+          <div class="mt-4 flex flex-wrap items-center gap-6">
+            <a
+              href={`mailto:beta@scubadeving.com?subject=${encodeURIComponent(product.cta.emailSubject)}`}
+              class="rounded text-sm font-medium text-accent hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              {product.cta.label} <span aria-hidden="true">→</span>
+            </a>
+            <a
+              href={discordUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded text-sm font-medium text-ink-muted hover:text-ink hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              Join the community <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Legal links -->
+      <div class="mb-12 flex flex-wrap gap-x-4 gap-y-1">
+        {[
+          { label: "Privacy", href: "/hydrovault/privacy" },
+          { label: "Terms", href: "/hydrovault/terms" },
+          { label: "Support", href: "/hydrovault/support" },
+        ].map((link) => (
+          <a
+            href={link.href}
+            class="text-xs text-ink-muted transition-colors hover:text-ink hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Also from scubadeving -->
+      {otherProducts.length > 0 && (
+        <section class="mb-12">
+          <h2 class="mb-4 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            Also from scubadeving
+          </h2>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {otherProducts.map((other) => (
+              <ProductCard
+                name={other.name}
+                tagline={other.tagline}
+                description={other.cardDescription}
+                status={other.status}
+                platform={other.platform}
+                href={`/${other.id}`}
+                appIcon={other.appIcon}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+    </main>
+
+    <Footer />
+
+  </div>
+</Layout>
