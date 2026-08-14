@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { products } from "../src/data/products";
 
 const staticPages = [
-  { url: "/", title: "scubadeving — software for serious divers" },
+  { url: "/", title: "scubadeving — dive software that doesn't suck" },
   { url: "/privacy", title: "Privacy Policy — scubadeving" },
 ];
 
