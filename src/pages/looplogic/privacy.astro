@@ -1,0 +1,90 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<Layout
+  title="LoopLogic Privacy Policy — scubadeving"
+  description="Privacy policy for LoopLogic. All data stays on your device — no account, no cloud, no tracking."
+  ogImage="/og-looplogic.png"
+>
+  <div class="mx-auto max-w-4xl px-6 py-24">
+
+    <Header showBack={true} />
+
+    <main>
+      <section class="mb-16">
+        <h1 class="text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+          LoopLogic Privacy Policy
+        </h1>
+        <p class="mt-4 text-sm text-ink-muted">Last updated: August 2026</p>
+      </section>
+
+      <div class="mb-24 space-y-12">
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            Data collection
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            LoopLogic does not collect, transmit, or store any personal data on external servers.
+            The app requires no account or sign-in of any kind.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            On-device storage
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            All data you enter — dive checklists, O₂ cell records, scrubber logs — is stored
+            locally on your device using an on-device database. This data never leaves your
+            device and is not accessible to scubadeving or any third party.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-ink-muted">
+            Uninstalling the app removes all stored data from your device.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            Third-party SDKs
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            LoopLogic does not include third-party advertising, analytics, or crash-reporting SDKs.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            Permissions
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            LoopLogic does not request access to your location, camera, microphone, contacts,
+            or any other sensitive device permissions beyond what is required for local storage.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            Contact
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            For privacy questions, contact us at{" "}
+            <a
+              href="mailto:hello@scubadeving.com"
+              class="rounded underline text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              hello@scubadeving.com
+            </a>.
+          </p>
+        </section>
+
+      </div>
+    </main>
+
+    <Footer />
+
+  </div>
+</Layout>

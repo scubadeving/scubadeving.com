@@ -1,0 +1,74 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { discordUrl, supportEmail } from "../../data/site";
+---
+
+<Layout
+  title="LoopLogic Support — scubadeving"
+  description="Get help with LoopLogic. Contact the scubadeving team or join the community on Discord."
+  ogImage="/og-looplogic.png"
+>
+  <div class="mx-auto max-w-4xl px-6 py-24">
+
+    <Header showBack={true} />
+
+    <main>
+      <section class="mb-16">
+        <h1 class="font-mono text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+          LoopLogic Support
+        </h1>
+        <p class="mt-4 max-w-xl text-base leading-relaxed text-ink-muted">
+          LoopLogic is currently in active development and approaching early testing.
+          Detailed documentation is on the way — in the meantime, reach out directly.
+        </p>
+      </section>
+
+      <div class="mb-24 space-y-6">
+
+        <div class="rounded-2xl border border-surface-border bg-surface-raised p-6">
+          <h2 class="text-sm font-medium text-ink">Email support</h2>
+          <p class="mt-2 text-sm leading-relaxed text-ink-muted">
+            For bug reports, questions, or feedback, email us directly.
+          </p>
+          <a
+            href={`mailto:${supportEmail}?subject=LoopLogic support`}
+            class="mt-4 inline-block rounded text-sm font-medium text-accent hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            {supportEmail} →
+          </a>
+        </div>
+
+        <div class="rounded-2xl border border-surface-border bg-surface-raised p-6">
+          <h2 class="text-sm font-medium text-ink">Community Discord</h2>
+          <p class="mt-2 text-sm leading-relaxed text-ink-muted">
+            Join the scubadeving Discord to ask questions, share feedback, and follow
+            development progress in real time.
+          </p>
+          <a
+            href={discordUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-4 inline-block rounded text-sm font-medium text-accent hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            Join Discord →
+          </a>
+        </div>
+
+        <div class="rounded-2xl border border-surface-border bg-surface-raised p-6">
+          <h2 class="text-sm font-medium text-ink">Life support notice</h2>
+          <p class="mt-2 text-sm leading-relaxed text-ink-muted">
+            LoopLogic is a supplemental tool for dive planning and equipment tracking.
+            It is not a dive computer and should never be used as a primary life-support
+            instrument. Always cross-verify with manufacturer-approved tables or computers.
+          </p>
+        </div>
+
+      </div>
+    </main>
+
+    <Footer />
+
+  </div>
+</Layout>
