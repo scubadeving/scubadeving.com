@@ -62,6 +62,7 @@ const ogImageUrl = ogImage
     {ogImageUrl && <meta name="twitter:image:alt" content={title} />}
 
     {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
   </head>
   <body class="bg-surface text-ink antialiased">
     <slot />

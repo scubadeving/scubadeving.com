@@ -1,0 +1,110 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+const entries = [
+  {
+    version: "Unreleased",
+    label: "Current",
+    items: [
+      {
+        type: "added",
+        text: "Dive authorization engine — real-time go/no-go status derived from cell health and checklist state across all feature screens.",
+      },
+      {
+        type: "added",
+        text: "KMP platform abstraction layer — file I/O seam introduced to prepare the codebase for iOS and web targets without domain rewrites.",
+      },
+      {
+        type: "improved",
+        text: "Full accessibility audit complete — TalkBack support across all screens, nav-rail authorization badges, merged semantics on all interactive surfaces.",
+      },
+      {
+        type: "improved",
+        text: "Lifecycle-safe event handling across all feature screens, replacing bare LaunchedEffect collectors.",
+      },
+      {
+        type: "improved",
+        text: "Cell manufacturer display names are now locale-stable. Checklist category parsing is locale-safe (Turkish-I and similar cases handled).",
+      },
+      {
+        type: "fixed",
+        text: "Dashboard checklist card required a double-tap to navigate. Root cause was unconditional pager scroll animation on first composition.",
+      },
+      {
+        type: "fixed",
+        text: "Auth navigation routing restored after regression introduced by use-case wiring changes.",
+      },
+      {
+        type: "fixed",
+        text: "Scrubber UI state made snapshot-stable. Accessibility labels and localisation gaps resolved.",
+      },
+    ],
+  },
+];
+
+const typeLabel: Record<string, string> = {
+  added: "Added",
+  improved: "Improved",
+  fixed: "Fixed",
+};
+
+const typeColor: Record<string, string> = {
+  added: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
+  improved: "text-accent bg-accent/10 border-accent/20",
+  fixed: "text-amber-400 bg-amber-400/10 border-amber-400/20",
+};
+---
+
+<Layout
+  title="LoopLogic Changelog — scubadeving"
+  description="Development changelog for LoopLogic. Follow what's being built and fixed before public release."
+  ogImage="/og-looplogic.png"
+>
+  <div class="mx-auto max-w-4xl px-6 py-24">
+
+    <Header showBack={true} />
+
+    <main>
+      <section class="mb-16">
+        <h1 class="font-mono text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+          LoopLogic Changelog
+        </h1>
+        <p class="mt-4 max-w-xl text-base leading-relaxed text-ink-muted">
+          User-facing changes as LoopLogic moves toward release. Technical infrastructure
+          changes are omitted — this tracks what divers will actually see and use.
+        </p>
+      </section>
+
+      <div class="space-y-12 mb-24">
+        {entries.map((entry) => (
+          <div>
+            <div class="mb-6 flex items-center gap-3">
+              <h2 class="font-mono text-lg font-medium text-ink">{entry.version}</h2>
+              {entry.label && (
+                <span class="rounded-full border border-accent/20 bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent">
+                  {entry.label}
+                </span>
+              )}
+            </div>
+            <div class="space-y-3">
+              {entry.items.map((item) => (
+                <div class="flex items-start gap-3">
+                  <span class={`mt-0.5 shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-medium ${typeColor[item.type]}`}>
+                    {typeLabel[item.type]}
+                  </span>
+                  <p class="text-sm leading-relaxed text-ink-muted">{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </main>
+
+    <Footer />
+
+  </div>
+</Layout>

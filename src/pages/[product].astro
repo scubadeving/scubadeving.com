@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { products, statusLabel, statusColor } from "../data/products";
+import { betaEmail } from "../data/site";
 
 export const getStaticPaths = (() => {
   return products.map((product) => ({
@@ -102,7 +103,7 @@ const jsonLd = {
         <p class="mt-2 text-sm leading-relaxed text-ink-muted">{product.cta.body}</p>
         <div class="mt-4 flex flex-wrap items-center gap-6">
           <a
-            href={`mailto:hello@scubadeving.com?subject=${encodeURIComponent(product.cta.emailSubject)}`}
+            href={`mailto:${betaEmail}?subject=${encodeURIComponent(product.cta.emailSubject)}`}
             class="rounded text-sm font-medium text-accent hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             {product.cta.label} <span aria-hidden="true">→</span>

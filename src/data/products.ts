@@ -91,7 +91,7 @@ export const products: Product[] = [
   {
     id: "hydrovault",
     name: "HydroVault",
-    tagline: "Scuba cylinder management",
+    tagline: "scuba cylinder management",
     cardDescription:
       "Track hydrostatic tests, VIP inspections, and O₂ service records for your scuba cylinders. Early development.",
     heroDescription:

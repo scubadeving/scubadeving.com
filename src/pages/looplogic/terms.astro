@@ -1,0 +1,203 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { helloEmail } from "../../data/site";
+---
+
+<Layout
+  title="LoopLogic Terms of Service — scubadeving"
+  description="Terms of service for LoopLogic, a CCR dive operations and analytics app by scubadeving."
+  ogImage="/og-looplogic.png"
+>
+  <div class="mx-auto max-w-4xl px-6 py-24">
+
+    <Header showBack={true} />
+
+    <main>
+      <section class="mb-16">
+        <h1 class="text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+          LoopLogic Terms of Service
+        </h1>
+        <p class="mt-4 text-sm text-ink-muted">Last updated: August 2026</p>
+        <p class="mt-3 rounded-xl border border-amber-400/20 bg-amber-400/5 px-4 py-3 text-xs leading-relaxed text-amber-400">
+          This document is a working draft. It has not been reviewed by legal counsel.
+          Do not rely on it as a final legal instrument — have it reviewed by a qualified
+          attorney before public release.
+        </p>
+      </section>
+
+      <div class="mb-24 space-y-12">
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            1. Agreement to terms
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            By downloading, installing, or using LoopLogic ("the App"), you agree to be bound
+            by these Terms of Service ("Terms"). If you do not agree to these Terms, do not
+            use the App. These Terms apply to all users of the App, including beta testers
+            and early-access participants.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            2. Description of service
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            LoopLogic is a closed-circuit rebreather (CCR) operations and analytics app that
+            provides pre-dive checklists, O₂ cell health tracking, scrubber usage logging,
+            and related record-keeping functionality. The App operates entirely offline and
+            stores all data locally on your device.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            3. Safety and life support disclaimer
+          </h2>
+          <div class="space-y-3">
+            <p class="text-sm font-medium text-ink">
+              Read this section carefully. It directly affects your safety.
+            </p>
+            <p class="text-sm leading-relaxed text-ink-muted">
+              LoopLogic is a <strong class="font-medium text-ink">supplemental record-keeping
+              and planning tool only</strong>. It is not a dive computer, not a life support
+              instrument, and must never be used as the primary or sole basis for any
+              safety-critical decision during a dive.
+            </p>
+            <p class="text-sm leading-relaxed text-ink-muted">
+              Diving with a closed-circuit rebreather involves inherent risks that can result
+              in serious injury or death. You are solely responsible for:
+            </p>
+            <ul class="ml-4 space-y-1 text-sm leading-relaxed text-ink-muted list-disc">
+              <li>Cross-verifying all checklist results, cell readings, and scrubber data against manufacturer-approved instruments and procedures.</li>
+              <li>Making all go/no-go dive decisions based on your own training, experience, and manufacturer-approved equipment.</li>
+              <li>Ensuring your rebreather is in a safe, serviceable condition before every dive.</li>
+            </ul>
+            <p class="text-sm leading-relaxed text-ink-muted">
+              scubadeving makes no representation that the App's data, readings, or
+              recommendations are accurate, complete, or suitable for any particular dive.
+              The App may contain bugs, calculation errors, or inaccuracies. Never substitute
+              the App for proper dive training, equipment maintenance, or manufacturer guidance.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            4. Beta software notice
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            LoopLogic is currently pre-release software. Beta and early-access versions may
+            contain bugs, incomplete features, or unexpected behavior. By participating in
+            beta testing you acknowledge that:
+          </p>
+          <ul class="mt-3 ml-4 space-y-1 text-sm leading-relaxed text-ink-muted list-disc">
+            <li>The App is not production-ready and should be used with additional caution.</li>
+            <li>Data stored in beta versions may not migrate to future releases.</li>
+            <li>Access to the beta may be modified or revoked at any time.</li>
+            <li>Feedback you provide may be used to improve the App without compensation.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            5. Permitted use
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            You may use the App for personal, non-commercial dive record-keeping and planning.
+            You may not: reverse engineer, decompile, or disassemble the App; redistribute
+            or resell the App or its content; use the App in any way that violates applicable
+            law; or misrepresent the App's output as certified dive equipment data.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            6. Intellectual property
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            The App, including its design, code, and content, is the property of scubadeving
+            and is protected by applicable intellectual property law. These Terms do not
+            grant you any ownership rights in the App. Open-source components used in the
+            App are governed by their respective licenses, which are disclosed within the App.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            7. Disclaimer of warranties
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            The App is provided "as is" and "as available" without warranties of any kind,
+            express or implied, including but not limited to warranties of merchantability,
+            fitness for a particular purpose, accuracy, or non-infringement. scubadeving does
+            not warrant that the App will be error-free, uninterrupted, or free of harmful
+            components.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            8. Limitation of liability
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            To the fullest extent permitted by law, scubadeving shall not be liable for any
+            indirect, incidental, special, consequential, or punitive damages arising from
+            your use of or inability to use the App — including but not limited to personal
+            injury, death, loss of data, or equipment damage — regardless of the theory of
+            liability and even if scubadeving has been advised of the possibility of such damages.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-ink-muted">
+            scubadeving's total liability to you for any claim arising from these Terms or
+            your use of the App shall not exceed the amount you paid for the App in the
+            twelve months preceding the claim (which, for a free app, is zero).
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            9. Governing law
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            These Terms are governed by the laws of the State of California, United States,
+            without regard to conflict of law principles. Any disputes arising under these
+            Terms shall be resolved in the state or federal courts located in California.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            10. Changes to these terms
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            scubadeving reserves the right to update these Terms at any time. Updated Terms
+            will be posted at this URL with a revised date. Continued use of the App after
+            changes are posted constitutes acceptance of the updated Terms.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-xs font-medium uppercase tracking-widest text-ink-muted">
+            11. Contact
+          </h2>
+          <p class="text-sm leading-relaxed text-ink-muted">
+            Questions about these Terms may be directed to{" "}
+            <a
+              href={`mailto:${helloEmail}`}
+              class="rounded underline text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              {helloEmail}
+            </a>.
+          </p>
+        </section>
+
+      </div>
+    </main>
+
+    <Footer />
+
+  </div>
+</Layout>
