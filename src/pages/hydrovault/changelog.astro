@@ -1,0 +1,94 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+const entries = [
+  {
+    version: "Unreleased",
+    label: "Current",
+    items: [
+      {
+        type: "added",
+        text: "Core cylinder management — add, edit, and view scuba cylinders with full material, pressure, and serial number tracking.",
+      },
+      {
+        type: "added",
+        text: "Service history log — hydrostatic test, VIP inspection, and O₂ clean service entries with offline storage via SQLDelight.",
+      },
+      {
+        type: "added",
+        text: "DOT and EN standards built in — inspection intervals derived from regulatory specs for NA and European cylinders.",
+      },
+      {
+        type: "added",
+        text: "KMP-ready architecture — pure-Kotlin domain layer with no Android dependencies, prepared for future iOS and web targets.",
+      },
+    ],
+  },
+];
+
+const typeLabel: Record<string, string> = {
+  added: "Added",
+  improved: "Improved",
+  fixed: "Fixed",
+};
+
+const typeColor: Record<string, string> = {
+  added: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
+  improved: "text-accent bg-accent/10 border-accent/20",
+  fixed: "text-amber-400 bg-amber-400/10 border-amber-400/20",
+};
+---
+
+<Layout
+  title="HydroVault Changelog — scubadeving"
+  description="Development changelog for HydroVault. Follow what's being built before public release."
+  ogImage="/og-hydrovault.png"
+>
+  <div class="mx-auto max-w-4xl px-6 py-24">
+
+    <Header showBack={true} />
+
+    <main>
+      <section class="mb-16">
+        <h1 class="font-mono text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+          HydroVault Changelog
+        </h1>
+        <p class="mt-4 max-w-xl text-base leading-relaxed text-ink-muted">
+          User-facing changes as HydroVault moves toward release. Technical infrastructure
+          changes are omitted — this tracks what divers will actually see and use.
+        </p>
+      </section>
+
+      <div class="space-y-12 mb-24">
+        {entries.map((entry) => (
+          <div>
+            <div class="mb-6 flex items-center gap-3">
+              <h2 class="font-mono text-lg font-medium text-ink">{entry.version}</h2>
+              {entry.label && (
+                <span class="rounded-full border border-accent/20 bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent">
+                  {entry.label}
+                </span>
+              )}
+            </div>
+            <div class="space-y-3">
+              {entry.items.map((item) => (
+                <div class="flex items-start gap-3">
+                  <span class={`mt-0.5 shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-medium ${typeColor[item.type]}`}>
+                    {typeLabel[item.type]}
+                  </span>
+                  <p class="text-sm leading-relaxed text-ink-muted">{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </main>
+
+    <Footer />
+
+  </div>
+</Layout>
