@@ -22,23 +22,55 @@ const supportedUnits = [
 const milestones = [
   {
     label: "Core features shipped",
-    detail: "Checklists, cell analytics, scrubber tracking, and dashboard all complete.",
+    detail: "Checklists, cell analytics, scrubber tracking, and dashboard are in the alpha.",
+  },
+  {
+    label: "Gas math tools",
+    detail: "CNS/OTU calculators, best mix, gas density safety check, a log of saved exposures, and daily exposure tracking.",
+  },
+  {
+    label: "Unit system",
+    detail: "Full metric and imperial support throughout the app.",
+  },
+  {
+    label: "Multi-CCR support",
+    detail: "Manage multiple rebreather units in a single app; cell, scrubber and maintenance records are kept per unit.",
+  },
+  {
+    label: "Surface interval calculator",
+    detail: "See how long until your CNS % falls to a target.",
+  },
+  {
+    label: "Push notifications",
+    detail: "Alerts for scrubber capacity, O₂ cell expiry and CNS exposure — optional, fully on-device.",
+  },
+  {
+    label: "Home screen widget",
+    detail: "Glanceable dive authorization status and scrubber state from your home screen.",
+  },
+  {
+    label: "Onboarding flow",
+    detail: "Guided setup for first-time users — unit selection, CCR configuration, and a one-time safety notice.",
   },
   {
     label: "Dive authorization engine",
-    detail: "Real-time go/no-go status derived from cell health and checklist state.",
+    detail: "An at-a-glance status from cell health and checklist state. A reminder, not a clearance.",
   },
   {
-    label: "Accessibility audit complete",
-    detail: "Full TalkBack support across all screens — usable with gloves or in low visibility.",
+    label: "Accessibility groundwork",
+    detail: "Labels and grouped semantics across screens; a full screen-reader test pass is still in progress.",
   },
   {
-    label: "98% test coverage enforced",
-    detail: "CI quality gate runs on every push. No regressions ship without detection.",
+    label: "Automated tests and a coverage gate",
+    detail: "A CI quality gate runs on every push to catch regressions before they ship.",
   },
   {
     label: "KMP foundation in place",
-    detail: "Platform abstraction layer laid for future iOS and web targets.",
+    detail: "Platform abstraction layer in place; iOS is in progress.",
+  },
+  {
+    label: "Alpha release prep complete",
+    detail: "Release signing, R8 shrinking, ProGuard rules, and CI release workflow all in place.",
   },
 ];
 
@@ -46,10 +78,6 @@ const roadmap = [
   {
     title: "Bühlmann deco engine",
     detail: "ZHL-16C decompression model with configurable Gradient Factors.",
-  },
-  {
-    title: "Gas math calculators",
-    detail: "CNS, OTU, and Best Mix based on target setpoint.",
   },
   {
     title: "Dive-deck UI mode",
@@ -194,8 +222,8 @@ const jsonLd = {
         <div class="grid gap-3 sm:grid-cols-3">
           {[
             { label: "No account required", detail: "Nothing to sign up for. Open the app and start logging." },
-            { label: "Offline-first", detail: "All data stays on your device. Works on the dive deck with zero signal." },
-            { label: "Quality gates enforced", detail: "98% test coverage required. Spotless, Detekt, and lint run on every push — nothing ships broken." },
+            { label: "Offline-first", detail: "Your records stay on your device; only crash reports from release builds leave it. Works on the dive deck with zero signal." },
+            { label: "Quality gates enforced", detail: "Automated tests and a coverage gate run on every push, along with Spotless, Detekt, and lint." },
           ].map((item) => (
             <div class="rounded-2xl border border-surface-border bg-surface-raised p-4">
               <p class="text-sm font-medium text-ink">{item.label}</p>
@@ -275,10 +303,10 @@ const jsonLd = {
       <!-- Legal links -->
       <div class="mb-12 flex flex-wrap gap-x-4 gap-y-1">
         {[
+          { label: "Changelog", href: "/looplogic/changelog" },
+          { label: "Support", href: "/looplogic/support" },
           { label: "Privacy", href: "/looplogic/privacy" },
           { label: "Terms", href: "/looplogic/terms" },
-          { label: "Support", href: "/looplogic/support" },
-          { label: "Changelog", href: "/looplogic/changelog" },
         ].map((link) => (
           <a
             href={link.href}

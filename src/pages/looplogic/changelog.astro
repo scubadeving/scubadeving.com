@@ -5,20 +5,68 @@ import Footer from "../../components/Footer.astro";
 
 const entries = [
   {
-    version: "Unreleased",
+    version: "Unreleased — Alpha",
     label: "Current",
     items: [
       {
         type: "added",
-        text: "Dive authorization engine — real-time go/no-go status derived from cell health and checklist state across all feature screens.",
+        text: "Alpha release infrastructure — release signing, R8 shrinking, ProGuard rules, and a CI release workflow triggered on version tags.",
       },
       {
         type: "added",
-        text: "KMP platform abstraction layer — file I/O seam introduced to prepare the codebase for iOS and web targets without domain rewrites.",
+        text: "Crash reporting via Firebase Crashlytics in release builds. No Analytics, no advertising — crash data only, used to fix stability issues. Debug builds are unaffected.",
+      },
+      {
+        type: "added",
+        text: "Structured logging via Timber — debug logs in development, crash-aware logging in release. All ad-hoc Log calls removed.",
+      },
+      {
+        type: "added",
+        text: "Home screen widget — glanceable dive authorization status and scrubber state directly from your Android home screen.",
+      },
+      {
+        type: "added",
+        text: "Push notifications — optional alerts for scrubber capacity, O₂ cell expiry and CNS exposure. Fully on-device, no account required.",
+      },
+      {
+        type: "added",
+        text: "Surface interval — see how long until your CNS % falls to a target.",
+      },
+      {
+        type: "added",
+        text: "Onboarding flow — guided first-launch setup covering unit preferences, CCR configuration, and a one-time safety notice you must accept before using the app.",
+      },
+      {
+        type: "added",
+        text: "About & legal screen in-app — licenses, safety disclaimer, and version info accessible without leaving the app.",
+      },
+      {
+        type: "added",
+        text: "Multi-CCR support — manage multiple rebreather units in a single profile; cell, scrubber and maintenance records are kept per unit.",
+      },
+      {
+        type: "added",
+        text: "Unit system — full metric and imperial support throughout the app, switchable at any time.",
+      },
+      {
+        type: "added",
+        text: "Gas math tools — CNS/OTU calculators, best mix, daily exposure tracking, and gas density safety check with helium fraction input.",
+      },
+      {
+        type: "added",
+        text: "Exposure log — save depth, time and setpoint with the CNS/OTU they add up to.",
+      },
+      {
+        type: "added",
+        text: "Dive authorization status — an at-a-glance status from cell health and checklist state, shown on the dashboard and home screen widget. A reminder, not a clearance.",
+      },
+      {
+        type: "added",
+        text: "KMP platform abstraction layer — file I/O seam so the codebase can be shared with iOS, which is in progress.",
       },
       {
         type: "improved",
-        text: "Full accessibility audit complete — TalkBack support across all screens, nav-rail authorization badges, merged semantics on all interactive surfaces.",
+        text: "Accessibility labels, nav-rail authorization badges and grouped semantics added across screens; a full screen-reader test pass is still in progress.",
       },
       {
         type: "improved",
@@ -26,11 +74,11 @@ const entries = [
       },
       {
         type: "improved",
-        text: "Cell manufacturer display names are now locale-stable. Checklist category parsing is locale-safe (Turkish-I and similar cases handled).",
+        text: "Cell manufacturer display names are locale-stable. Checklist category parsing handles Turkish-I and similar locale edge cases.",
       },
       {
         type: "fixed",
-        text: "Dashboard checklist card required a double-tap to navigate. Root cause was unconditional pager scroll animation on first composition.",
+        text: "Dashboard checklist card required a double-tap to navigate. Root cause: unconditional pager scroll animation on first composition.",
       },
       {
         type: "fixed",
