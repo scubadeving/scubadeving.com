@@ -6,7 +6,7 @@ import Footer from "../../components/Footer.astro";
 
 <Layout
   title="LoopLogic Privacy Policy — scubadeving"
-  description="Privacy policy for LoopLogic. All data stays on your device — no account, no cloud, no tracking."
+  description="Privacy policy for LoopLogic. Your records stay on your device — no account, no cloud, no tracking. Release builds send crash reports."
   ogImage="/og-looplogic.png"
 >
   <div class="mx-auto max-w-4xl px-6 py-24">
@@ -52,7 +52,15 @@ import Footer from "../../components/Footer.astro";
             Third-party SDKs
           </h2>
           <p class="text-sm leading-relaxed text-ink-muted">
-            LoopLogic does not include third-party advertising, analytics, or crash-reporting SDKs.
+            LoopLogic does not include advertising or analytics SDKs. Firebase Analytics is
+            deliberately excluded.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-ink-muted">
+            Release builds include <strong class="font-medium text-ink">Firebase Crashlytics</strong>
+            for crash reporting. Crashlytics collects crash stack traces and device
+            state at the time of a crash, plus a randomly generated installation identifier. The app
+            has no account to link a report to. This data is used solely to detect and fix stability issues — it is not used for
+            advertising, profiling, or any purpose beyond app reliability.
           </p>
         </section>
 
@@ -61,8 +69,12 @@ import Footer from "../../components/Footer.astro";
             Permissions
           </h2>
           <p class="text-sm leading-relaxed text-ink-muted">
-            LoopLogic does not request access to your location, camera, microphone, contacts,
-            or any other sensitive device permissions beyond what is required for local storage.
+            LoopLogic does not request access to your location, camera, microphone, or contacts.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-ink-muted">
+            The app may request the <strong class="font-medium text-ink">notification permission</strong>
+            (Android 13+) to deliver alerts for scrubber capacity, O₂ cell expiry and CNS exposure. This permission
+            is optional — the app is fully functional without it.
           </p>
         </section>
 
