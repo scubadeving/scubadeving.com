@@ -91,7 +91,7 @@ export const products: Product[] = [
       {
         title: "Offline-first",
         description:
-          "Your records stay on your device. On Android, release builds send crash reports to Firebase Crashlytics; the iOS alpha does not send crash reports yet. No account, no cloud dependency — works on the dive deck with no signal.",
+          "Your records stay on your device. Release builds on Android and iOS send crash reports to Firebase Crashlytics. No account, no cloud dependency — works on the dive deck with no signal.",
       },
       {
         title: "English and Spanish",

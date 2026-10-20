@@ -6,7 +6,7 @@ import Footer from "../../components/Footer.astro";
 
 <Layout
   title="LoopLogic Privacy Policy — scubadeving"
-  description="Privacy policy for LoopLogic. Your records stay on your device — no account, no cloud, no tracking. Android release builds send crash reports; alpha-testing forms and chat are covered too."
+  description="Privacy policy for LoopLogic. Your records stay on your device — no account, no cloud, no tracking. Release builds send crash reports; alpha-testing forms and chat are covered too."
   ogImage="/og-looplogic.png"
 >
   <div class="mx-auto max-w-4xl px-6 py-24">
@@ -58,10 +58,10 @@ import Footer from "../../components/Footer.astro";
             The app: crash reports
           </h2>
           <p class="text-sm leading-relaxed text-ink-muted">
-            Android release builds include <strong class="font-medium text-ink">Firebase Crashlytics</strong>. When the app crashes, it sends the crash stack trace, the app version, your device model and operating system version, the state of the device at that moment, and a randomly generated installation identifier. We do not add your name or email, and the app has no account to link a report to. We use it only to find and fix crashes. There is currently no setting in the app to turn crash reports off.
+            Android and iOS release builds include <strong class="font-medium text-ink">Firebase Crashlytics</strong>. When the app crashes, it sends the crash stack trace, the app version, your device model and operating system version, the state of the device at that moment, and a randomly generated installation identifier. We do not add your name or email, and the app has no account to link a report to. We use it only to find and fix crashes. There is currently no setting in the app to turn crash reports off.
           </p>
           <p class="mt-3 text-sm leading-relaxed text-ink-muted">
-            The iOS app does not send crash reports at this time. If that changes, this policy will be updated before it does.
+            Debug builds used during development send nothing. On iPhone and iPad this is the same data, declared in the app's privacy manifest as Crash Data and Device ID, not linked to you and not used for tracking.
           </p>
         </section>
 

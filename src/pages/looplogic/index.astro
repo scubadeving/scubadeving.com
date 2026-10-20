@@ -94,7 +94,7 @@ const platformRows = [
   { feature: "Vibration and sound feedback", android: "Yes", ios: "Yes" },
   { feature: "Home screen widget", android: "Yes", ios: "Not yet" },
   { feature: "Export and import of logs and checklists", android: "Yes", ios: "Not yet" },
-  { feature: "Crash reports (release builds)", android: "Yes", ios: "Not yet" },
+  { feature: "Crash reports (release builds)", android: "Yes", ios: "Yes" },
   { feature: "English and Spanish", android: "Yes", ios: "Yes" },
   { feature: "Full screen-reader pass", android: "In progress", ios: "In progress" },
 ];
@@ -338,7 +338,7 @@ const jsonLd = {
         </h2>
         <p class="mb-5 max-w-2xl text-xs leading-relaxed text-ink-muted">
           The iOS column describes the app as built. iOS is not open to testers yet, and some behavior there, such as
-          alerts and vibration, has so far only been checked in the simulator.
+          alerts, vibration and crash reporting, has so far only been checked in the simulator.
         </p>
         <div
           role="region"
@@ -373,7 +373,7 @@ const jsonLd = {
         <div class="grid gap-3 sm:grid-cols-3">
           {[
             { label: "No account required", detail: "Nothing to sign up for. Open the app and start logging." },
-            { label: "Offline-first", detail: "Your records stay on your device. Works on the dive deck with zero signal. See the privacy policy for the crash reports Android release builds send." },
+            { label: "Offline-first", detail: "Your records stay on your device. Works on the dive deck with zero signal. See the privacy policy for the crash reports release builds send." },
             { label: "Quality gates enforced", detail: "Automated tests and static checks run on every change, and the numbers are checked against references." },
           ].map((item) => (
             <div class="rounded-2xl border border-surface-border bg-surface-raised p-4">
