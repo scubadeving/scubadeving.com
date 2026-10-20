@@ -5,28 +5,44 @@ import Footer from "../../components/Footer.astro";
 
 const entries = [
   {
-    version: "Unreleased — Alpha",
+    version: "0.2.0 — Alpha (in preparation)",
     label: "Current",
     items: [
       {
         type: "added",
-        text: "Alpha release infrastructure — release signing, R8 shrinking, ProGuard rules, and a CI release workflow triggered on version tags.",
+        text: "An iOS version of LoopLogic is being prepared for a TestFlight alpha: checklists, cell calibration and analytics, scrubber tracking, gas math and gas mixing, settings and the safety notice. It is not open to testers yet.",
       },
       {
         type: "added",
-        text: "Crash reporting via Firebase Crashlytics in release builds. No Analytics, no advertising — crash data only, used to fix stability issues. Debug builds are unaffected.",
+        text: "Open source licenses screen listing every library the app is built with, with the full license text (Android and iOS).",
       },
       {
         type: "added",
-        text: "Structured logging via Timber — debug logs in development, crash-aware logging in release. All ad-hoc Log calls removed.",
+        text: "iOS: an unfinished calibration can be resumed after the app is closed. Readings are kept for 30 minutes and are dropped if a cell was replaced.",
       },
       {
         type: "added",
-        text: "Home screen widget — glanceable dive authorization status and scrubber state directly from your Android home screen.",
+        text: "iOS: Gas Math and Gas Mixing inputs are kept for 24 hours, shown with a note that they were restored and a Reset button. The current CNS value is never kept.",
       },
       {
         type: "added",
-        text: "Push notifications — optional alerts for scrubber capacity, O₂ cell expiry and CNS exposure. Fully on-device, no account required.",
+        text: "iOS: optional alerts for scrubber capacity and O₂ cell expiry, with a banner when notification permission is turned off. CNS exposure alerts are not on iOS yet.",
+      },
+      {
+        type: "added",
+        text: "iOS: vibration and sound feedback for checklist steps and timers, Gas Math, Gas Mixing and the scrubber, following the Settings switches.",
+      },
+      {
+        type: "added",
+        text: "Alerts on Android for scrubber capacity, O₂ cell expiry and CNS exposure — optional, generated on your device, no account required.",
+      },
+      {
+        type: "added",
+        text: "Home screen widget on Android — glanceable dive status and scrubber state.",
+      },
+      {
+        type: "added",
+        text: "Crash reporting via Firebase Crashlytics in Android release builds. No analytics, no advertising — crash data only, used to fix stability issues. Debug builds are unaffected, and the iOS alpha does not send crash reports yet.",
       },
       {
         type: "added",
@@ -34,7 +50,7 @@ const entries = [
       },
       {
         type: "added",
-        text: "Onboarding flow — guided first-launch setup covering unit preferences, CCR configuration, and a one-time safety notice you must accept before using the app.",
+        text: "Onboarding flow — guided first-launch setup covering unit preferences and CCR configuration, plus a one-time safety notice you must accept before using the app.",
       },
       {
         type: "added",
@@ -42,51 +58,51 @@ const entries = [
       },
       {
         type: "added",
-        text: "Multi-CCR support — manage multiple rebreather units in a single profile; cell, scrubber and maintenance records are kept per unit.",
+        text: "Multi-CCR support — manage several rebreather units in one app; cell, scrubber and maintenance records are kept per unit.",
       },
       {
         type: "added",
-        text: "Unit system — full metric and imperial support throughout the app, switchable at any time.",
+        text: "Gas math tools — CNS/OTU, best mix, gas density with helium fraction, setpoint optimizer, O₂ duration, SAC, bailout, rule of thirds, and an exposure log. Gas mixing tools — partial-pressure blends, top-up, fill capacity, temperature correction and equalization.",
       },
       {
         type: "added",
-        text: "Gas math tools — CNS/OTU calculators, best mix, daily exposure tracking, and gas density safety check with helium fraction input.",
-      },
-      {
-        type: "added",
-        text: "Exposure log — save depth, time and setpoint with the CNS/OTU they add up to.",
-      },
-      {
-        type: "added",
-        text: "Dive authorization status — an at-a-glance status from cell health and checklist state, shown on the dashboard and home screen widget. A reminder, not a clearance.",
-      },
-      {
-        type: "added",
-        text: "KMP platform abstraction layer — file I/O seam so the codebase can be shared with iOS, which is in progress.",
+        text: "Dive status — an at-a-glance status from cell health, calibration, checklist and scrubber state, shown on the dashboard and the Android widget. A reminder, not a clearance.",
       },
       {
         type: "improved",
-        text: "Accessibility labels, nav-rail authorization badges and grouped semantics added across screens; a full screen-reader test pass is still in progress.",
+        text: "The setpoint optimizer now says plainly when no setpoint from 0.70 to 1.40 keeps CNS within your ceiling, instead of showing a recommendation that exceeds it.",
       },
       {
         type: "improved",
-        text: "Lifecycle-safe event handling across all feature screens, replacing bare LaunchedEffect collectors.",
+        text: "Gas Math rejects a negative depth instead of showing numbers for it, and the O₂ duration result says on screen that real use is higher than the estimate.",
       },
       {
         type: "improved",
-        text: "Cell manufacturer display names are locale-stable. Checklist category parsing handles Turkish-I and similar locale edge cases.",
+        text: "Calculators were checked against published references and hand calculations, and give the same numbers in debug and release builds. A few reference checks are still open.",
+      },
+      {
+        type: "improved",
+        text: "Accessibility: labels, live regions for safety banners and the dive status badge, and contrast checks in every theme. A full screen-reader pass is still in progress.",
       },
       {
         type: "fixed",
-        text: "Dashboard checklist card required a double-tap to navigate. Root cause: unconditional pager scroll animation on first composition.",
+        text: "Onboarding could finish even when saving your unit or preferences failed, leaving a unit with default settings and no error. It now stops and shows the error (Android and iOS).",
       },
       {
         type: "fixed",
-        text: "Auth navigation routing restored after regression introduced by use-case wiring changes.",
+        text: "iOS: a batch calibration step could be completed with a blank reading, and a cell with no oxygen reading could be recorded as a failed test. Every cell now needs a real reading.",
       },
       {
         type: "fixed",
-        text: "Scrubber UI state made snapshot-stable. Accessibility labels and localisation gaps resolved.",
+        text: "iOS: Settings showed Import and Export rows that did nothing. They are hidden until backup is built.",
+      },
+      {
+        type: "fixed",
+        text: "The Vibration and Audio Alarms switches now apply in Gas Math, Gas Mixing and the Scrubber on Android.",
+      },
+      {
+        type: "fixed",
+        text: "A cell with no scrubber cycle after onboarding left the scrubber screen without data; the cycle is now created with the unit.",
       },
     ],
   },
