@@ -6,6 +6,9 @@ const allPages = [
   "/",
   "/privacy",
   ...products.map((p) => `/${p.id}`),
+  "/looplogic/changelog",
+  "/looplogic/privacy",
+  "/looplogic/support",
 ];
 
 for (const url of allPages) {
