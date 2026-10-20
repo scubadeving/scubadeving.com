@@ -3,89 +3,161 @@ import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import ProductCard from "../../components/ProductCard.astro";
+import ScreenshotGallery from "../../components/ScreenshotGallery.astro";
 import { products, statusLabel, statusColor } from "../../data/products";
 import { discordUrl } from "../../data/site";
 
 const product = products.find((p) => p.id === "looplogic")!;
 const otherProducts = products.filter((p) => p.id !== "looplogic");
 
-const supportedUnits = [
-  "Sidewinder",
-  "JJ-CCR",
-  "rEvo",
-  "AP Inspiration / Vision",
-  "KISS Classic",
-  "Hollis Explorer",
-  "More via CSV import",
+const unitGroups = [
+  { maker: "AP Diving", models: ["Inspiration", "Evolution", "Sentinel"] },
+  { maker: "KISS", models: ["Sidewinder", "Sidewinder 2", "Spirit", "Classic", "Sidekick", "GEM (semi-closed)"] },
+  { maker: "Dive Rite", models: ["Choptima", "Optima CM", "Optima BM"] },
+  { maker: "Divesoft", models: ["Liberty"] },
+  { maker: "Fathom", models: ["Gemini"] },
+  { maker: "Halcyon", models: ["Symbios"] },
+  { maker: "Innerspace Systems", models: ["JJ-CCR"] },
+  { maker: "Poseidon", models: ["MK6"] },
+  { maker: "rEVO Rebreathers", models: ["rEVO"] },
+  { maker: "Dive Talk", models: ["Dive Talk Go (mechanical)"] },
+  { maker: "Anything else", models: ["Custom unit with your own bay count and scrubber time"] },
+];
+
+const shots = [
+  {
+    src: "/screenshots/looplogic/android-dashboard.webp",
+    alt: "LoopLogic dashboard on Android: a green AUTHORIZED banner, three O₂ cells at 98 to 99 percent, the build checklist ready, and the scrubber timer.",
+    title: "Dashboard",
+    caption:
+      "Status, cells, checklists and scrubber on one screen. The banner is a reminder to look, not a clearance to dive.",
+  },
+  {
+    src: "/screenshots/looplogic/android-checklist.webp",
+    alt: "Build checklist at 40 percent complete: two steps ticked, the next step open and three steps locked.",
+    title: "Checklists that go in order",
+    caption: "A step unlocks only after the one before it is done. Build, pre-dive and pre-jump are separate lists.",
+  },
+  {
+    src: "/screenshots/looplogic/android-timer.webp",
+    alt: "A 2 minute positive pressure test timer counting down at 115 seconds, with an abort button.",
+    title: "Timers where a test needs one",
+    caption: "Positive and negative pressure tests and the pre-breathe run on a built-in timer you can abort.",
+  },
+  {
+    src: "/screenshots/looplogic/android-calibration.webp",
+    alt: "Cell 1 linearity test with air at 10.2 millivolts, oxygen at 48.4 millivolts, a calculated linearity of 99.6 percent and a response curve.",
+    title: "Cell linearity",
+    caption: "Enter the air and oxygen readings and see the linearity and response curve before you save.",
+  },
+  {
+    src: "/screenshots/looplogic/android-gas-math.webp",
+    alt: "Gas math calculator at 30 metres for 60 minutes at setpoint 1.3, showing CNS 33.3 percent, 89 OTU and gas density 4.9 grams per litre.",
+    title: "Gas math",
+    caption: "CNS, OTU, gas density and best mix for a planned dive. Results are for reference only.",
+  },
+  {
+    src: "/screenshots/looplogic/android-safety-notice.webp",
+    alt: "First-run safety notice titled Before you dive, saying LoopLogic is not a dive computer and does not replace training or judgment.",
+    title: "Honest from the first screen",
+    caption: "You accept a plain-language safety notice before the app opens. It is not a dive computer.",
+  },
+];
+
+const steps = [
+  {
+    n: "1",
+    title: "Set up your unit",
+    detail: "Pick your rebreather and the app fills in the bay count and scrubber time. Everything stays on your device.",
+  },
+  {
+    n: "2",
+    title: "Check and calibrate",
+    detail: "Register your O₂ cells, run linearity tests, and work through build, pre-dive and pre-jump checklists in order.",
+  },
+  {
+    n: "3",
+    title: "Know where you stand",
+    detail: "The dashboard shows cell health, checklist progress and scrubber time together, with alerts if you opt in.",
+  },
+];
+
+const platformRows = [
+  { feature: "Checklists, in order, with timers", android: "Yes", ios: "Yes" },
+  { feature: "Cell calibration (single and all cells) and analytics", android: "Yes", ios: "Yes" },
+  { feature: "Scrubber tracking", android: "Yes", ios: "Yes" },
+  { feature: "Gas math and gas mixing", android: "Yes", ios: "Yes" },
+  { feature: "Dashboard status (a reminder, not a clearance)", android: "Yes", ios: "Yes" },
+  { feature: "Several rebreather units", android: "Yes", ios: "Yes" },
+  { feature: "Scrubber and cell-expiry alerts", android: "Yes", ios: "Yes" },
+  { feature: "CNS exposure alerts", android: "Yes", ios: "Not yet" },
+  { feature: "Vibration and sound feedback", android: "Yes", ios: "Yes" },
+  { feature: "Home screen widget", android: "Yes", ios: "Not yet" },
+  { feature: "Export and import of logs and checklists", android: "Yes", ios: "Not yet" },
+  { feature: "Crash reports (release builds)", android: "Yes", ios: "Not yet" },
+  { feature: "English and Spanish", android: "Yes", ios: "Yes" },
+  { feature: "Full screen-reader pass", android: "In progress", ios: "In progress" },
 ];
 
 const milestones = [
   {
-    label: "Core features shipped",
-    detail: "Checklists, cell analytics, scrubber tracking, and dashboard are in the alpha.",
+    label: "Android alpha",
+    detail: "Checklists, cell analytics, scrubber tracking, gas math, alerts, the widget and the dashboard are built and in alpha testing.",
   },
   {
-    label: "Gas math tools",
-    detail: "CNS/OTU calculators, best mix, gas density safety check, a log of saved exposures, and daily exposure tracking.",
-  },
-  {
-    label: "Unit system",
-    detail: "Full metric and imperial support throughout the app.",
+    label: "iOS app",
+    detail: "Built on the same shared code and in preparation for a TestFlight alpha. See the table above for what it has today.",
   },
   {
     label: "Multi-CCR support",
-    detail: "Manage multiple rebreather units in a single app; cell, scrubber and maintenance records are kept per unit.",
+    detail: "Manage several rebreather units in one app; cell, scrubber and maintenance records are kept per unit.",
   },
   {
-    label: "Surface interval calculator",
-    detail: "See how long until your CNS % falls to a target.",
-  },
-  {
-    label: "Push notifications",
-    detail: "Alerts for scrubber capacity, O₂ cell expiry and CNS exposure — optional, fully on-device.",
-  },
-  {
-    label: "Home screen widget",
-    detail: "Glanceable dive authorization status and scrubber state from your home screen.",
-  },
-  {
-    label: "Onboarding flow",
-    detail: "Guided setup for first-time users — unit selection, CCR configuration, and a one-time safety notice.",
-  },
-  {
-    label: "Dive authorization engine",
+    label: "Dive status engine",
     detail: "An at-a-glance status from cell health and checklist state. A reminder, not a clearance.",
   },
   {
+    label: "Calculators checked against references",
+    detail: "MOD, best mix, gas density, CNS and OTU, SAC, bailout and the blending tools were checked against published references and hand calculations, and give the same numbers in debug and release builds. A few reference checks are still open.",
+  },
+  {
+    label: "Safety notice and plain disclaimers",
+    detail: "A one-time safety notice before first use, and a reference-only disclaimer on every planning screen.",
+  },
+  {
     label: "Accessibility groundwork",
-    detail: "Labels and grouped semantics across screens; a full screen-reader test pass is still in progress.",
+    detail: "Labels, live regions for safety banners, and contrast checks in every theme. A full screen-reader pass is still in progress.",
   },
   {
-    label: "Automated tests and a coverage gate",
-    detail: "A CI quality gate runs on every push to catch regressions before they ship.",
-  },
-  {
-    label: "KMP foundation in place",
-    detail: "Platform abstraction layer in place; iOS is in progress.",
-  },
-  {
-    label: "Alpha release prep complete",
-    detail: "Release signing, R8 shrinking, ProGuard rules, and CI release workflow all in place.",
+    label: "Automated quality gates",
+    detail: "Formatting, static analysis, lint, more than 1,500 automated tests and a release-build check run before changes are merged.",
   },
 ];
 
 const roadmap = [
   {
-    title: "Bühlmann deco engine",
-    detail: "ZHL-16C decompression model with configurable Gradient Factors.",
+    title: "iOS TestFlight alpha",
+    detail: "Invite-only iOS builds through TestFlight. Tell us you're interested and which device you use.",
   },
   {
-    title: "Dive-deck UI mode",
-    detail: "High-contrast, glove-friendly interface optimised for use at the water's edge.",
+    title: "Per-unit checklists",
+    detail: "A separate build, pre-dive and pre-jump checklist for each rebreather you dive.",
   },
   {
-    title: "iOS & more",
-    detail: "KMP groundwork is done — non-Android targets are the next platform milestone.",
+    title: "Backup on iOS",
+    detail: "Import and export of logs and checklists, which Android already has.",
+  },
+  {
+    title: "Decompression estimate",
+    detail: "A ZHL-16C estimate is built but hidden in every release until it has been compared against a trusted planner.",
+  },
+  {
+    title: "Display and accessibility controls",
+    detail: "In-app text size, reduced motion and larger touch targets for gloved or wet hands.",
+  },
+  {
+    title: "iOS alerts in the background",
+    detail: "Condition-based alerts, such as CNS exposure, on iOS, where the system decides when background checks run.",
   },
 ];
 
@@ -96,6 +168,7 @@ const jsonLd = {
   description: product.heroDescription,
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "Android",
+  screenshot: shots.map((shot) => `https://scubadeving.com${shot.src}`),
   author: {
     "@type": "Organization",
     name: "scubadeving",
@@ -117,7 +190,7 @@ const jsonLd = {
     <main>
 
       <!-- Hero -->
-      <section class="mb-20">
+      <section class="mb-16">
         <div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
           {product.appIcon && (
             <img
@@ -141,6 +214,14 @@ const jsonLd = {
             <p class="mt-4 max-w-xl text-base leading-relaxed text-ink-muted">
               {product.heroDescription}
             </p>
+            <ul role="list" class="mt-5 flex flex-wrap gap-2">
+              <li class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-400">
+                Android · alpha testing
+              </li>
+              <li class="rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-xs font-medium text-amber-400">
+                iOS · TestFlight alpha coming
+              </li>
+            </ul>
             <div class="mt-6 flex flex-wrap items-center gap-4">
               <a
                 href={`mailto:beta@scubadeving.com?subject=${encodeURIComponent(product.cta.emailSubject)}`}
@@ -157,20 +238,42 @@ const jsonLd = {
                 Join the community
               </a>
             </div>
-            <p class="mt-4 text-xs text-ink-muted">{product.platform}</p>
           </div>
         </div>
       </section>
 
-      <!-- Screenshot strip (placeholder) -->
-      <section class="mb-20">
-        <div class="flex gap-4 overflow-x-auto pb-2">
-          {[1, 2, 3].map(() => (
-            <div class="flex h-[480px] w-[220px] shrink-0 items-center justify-center rounded-2xl border border-surface-border bg-surface-raised text-xs text-ink-muted">
-              screenshot
-            </div>
+      <!-- Screenshots -->
+      <section class="mb-20" aria-labelledby="screens-heading">
+        <h2 id="screens-heading" class="mb-6 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          See it
+        </h2>
+        <ScreenshotGallery shots={shots} label="LoopLogic screenshots, scroll sideways to see more" />
+        <p class="mt-3 text-xs leading-relaxed text-ink-muted">
+          Screenshots are from the Android alpha with sample data (cell serials and readings are made up). The iOS app
+          follows the same design.
+        </p>
+      </section>
+
+      <!-- How it works -->
+      <section class="mb-20" aria-labelledby="how-heading">
+        <h2 id="how-heading" class="mb-6 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          How it works
+        </h2>
+        <ol class="grid gap-4 sm:grid-cols-3">
+          {steps.map((step) => (
+            <li class="rounded-2xl border border-surface-border bg-surface-raised p-5">
+              <span
+                class="flex h-7 w-7 items-center justify-center rounded-full border font-mono text-xs"
+                style={`border-color: ${product.brandColor}; color: ${product.brandColor}`}
+                aria-hidden="true"
+              >
+                {step.n}
+              </span>
+              <p class="mt-3 text-sm font-medium text-ink">{step.title}</p>
+              <p class="mt-1 text-xs leading-relaxed text-ink-muted">{step.detail}</p>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
 
       <!-- Who it's for -->
@@ -181,30 +284,41 @@ const jsonLd = {
             CCR divers who are done duct-taping spreadsheets and paper logs together.
           </p>
           <p class="mt-2 text-sm leading-relaxed text-ink-muted">
-            If you're running a Sidewinder, JJ-CCR, rEvo, AP, or any other unit and want a single offline-first
-            place to verify your gear, track cell health over time, and know your scrubber state before every
-            dive — this is built for you.
+            If you dive a Sidewinder, JJ-CCR, rEVO, AP, Dive Rite, Divesoft or any other unit and want one
+            offline-first place to verify your gear, track cell health over time, and know your scrubber state
+            before every dive — this is built for you.
           </p>
         </div>
       </section>
 
       <!-- Supported units -->
-      <section class="mb-20">
-        <h2 class="mb-4 text-xs font-medium uppercase tracking-widest text-ink-muted">
+      <section class="mb-20" aria-labelledby="units-heading">
+        <h2 id="units-heading" class="mb-2 text-xs font-medium uppercase tracking-widest text-ink-muted">
           Supported units
         </h2>
-        <div class="flex flex-wrap gap-2">
-          {supportedUnits.map((unit) => (
-            <span class="rounded-full border border-surface-border bg-surface-raised px-3 py-1 text-xs text-ink-muted">
-              {unit}
-            </span>
+        <p class="mb-5 max-w-2xl text-xs leading-relaxed text-ink-muted">
+          Choose your unit and the app fills in a bay count and scrubber time. The checklist templates are compiled from
+          public sources, are not endorsed by any manufacturer, and never replace your unit's manual or your training.
+        </p>
+        <dl class="grid gap-3 sm:grid-cols-2">
+          {unitGroups.map((group) => (
+            <div class="rounded-2xl border border-surface-border bg-surface-raised p-4">
+              <dt class="text-sm font-medium text-ink">{group.maker}</dt>
+              <dd class="mt-2 flex flex-wrap gap-1.5">
+                {group.models.map((model) => (
+                  <span class="rounded-full border border-surface-border px-2.5 py-0.5 text-xs text-ink-muted">
+                    {model}
+                  </span>
+                ))}
+              </dd>
+            </div>
           ))}
-        </div>
+        </dl>
       </section>
 
       <!-- Features -->
-      <section class="mb-20">
-        <h2 class="mb-8 text-xs font-medium uppercase tracking-widest text-ink-muted">
+      <section class="mb-20" aria-labelledby="features-heading">
+        <h2 id="features-heading" class="mb-8 text-xs font-medium uppercase tracking-widest text-ink-muted">
           What's inside
         </h2>
         <div class="grid gap-6 sm:grid-cols-2">
@@ -217,13 +331,50 @@ const jsonLd = {
         </div>
       </section>
 
-      <!-- Trust signals: offline-first -->
+      <!-- Android and iOS -->
+      <section class="mb-20" aria-labelledby="platforms-heading">
+        <h2 id="platforms-heading" class="mb-2 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          Android and iOS
+        </h2>
+        <p class="mb-5 max-w-2xl text-xs leading-relaxed text-ink-muted">
+          The iOS column describes the app as built. iOS is not open to testers yet, and some behavior there, such as
+          alerts and vibration, has so far only been checked in the simulator.
+        </p>
+        <div
+          role="region"
+          aria-label="Feature comparison between Android and iOS, scroll sideways if needed"
+          tabindex="0"
+          class="overflow-x-auto rounded-2xl border border-surface-border focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          <table class="w-full min-w-[480px] text-left text-sm">
+            <caption class="sr-only">Which LoopLogic features each platform has</caption>
+            <thead class="bg-surface-raised text-xs uppercase tracking-widest text-ink-muted">
+              <tr>
+                <th scope="col" class="px-4 py-3 font-medium">Feature</th>
+                <th scope="col" class="px-4 py-3 font-medium">Android</th>
+                <th scope="col" class="px-4 py-3 font-medium">iOS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {platformRows.map((row) => (
+                <tr class="border-t border-surface-border">
+                  <th scope="row" class="px-4 py-3 font-normal text-ink">{row.feature}</th>
+                  <td class={`px-4 py-3 ${row.android === "Yes" ? "text-emerald-400" : "text-amber-400"}`}>{row.android}</td>
+                  <td class={`px-4 py-3 ${row.ios === "Yes" ? "text-emerald-400" : "text-amber-400"}`}>{row.ios}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Trust signals -->
       <section class="mb-20">
         <div class="grid gap-3 sm:grid-cols-3">
           {[
             { label: "No account required", detail: "Nothing to sign up for. Open the app and start logging." },
-            { label: "Offline-first", detail: "Your records stay on your device; only crash reports from release builds leave it. Works on the dive deck with zero signal." },
-            { label: "Quality gates enforced", detail: "Automated tests and a coverage gate run on every push, along with Spotless, Detekt, and lint." },
+            { label: "Offline-first", detail: "Your records stay on your device. Works on the dive deck with zero signal. See the privacy policy for the crash reports Android release builds send." },
+            { label: "Quality gates enforced", detail: "Automated tests and static checks run on every change, and the numbers are checked against references." },
           ].map((item) => (
             <div class="rounded-2xl border border-surface-border bg-surface-raised p-4">
               <p class="text-sm font-medium text-ink">{item.label}</p>
@@ -234,14 +385,14 @@ const jsonLd = {
       </section>
 
       <!-- Dev progress -->
-      <section class="mb-20">
-        <h2 class="mb-6 text-xs font-medium uppercase tracking-widest text-ink-muted">
-          Development progress
+      <section class="mb-20" aria-labelledby="progress-heading">
+        <h2 id="progress-heading" class="mb-6 text-xs font-medium uppercase tracking-widest text-ink-muted">
+          Where it stands
         </h2>
         <div class="space-y-4">
           {milestones.map((m) => (
             <div class="flex items-start gap-3">
-              <span class="mt-0.5 shrink-0 text-[10px]" style={`color: ${product.brandColor}`}>✓</span>
+              <span class="mt-0.5 shrink-0 text-[10px]" style={`color: ${product.brandColor}`} aria-hidden="true">✓</span>
               <div>
                 <p class="text-sm font-medium text-ink">{m.label}</p>
                 <p class="mt-0.5 text-xs leading-relaxed text-ink-muted">{m.detail}</p>
@@ -252,8 +403,8 @@ const jsonLd = {
       </section>
 
       <!-- Roadmap -->
-      <section class="mb-20">
-        <h2 class="mb-6 text-xs font-medium uppercase tracking-widest text-ink-muted">
+      <section class="mb-20" aria-labelledby="next-heading">
+        <h2 id="next-heading" class="mb-6 text-xs font-medium uppercase tracking-widest text-ink-muted">
           Up next
         </h2>
         <div class="grid gap-4 sm:grid-cols-2">
