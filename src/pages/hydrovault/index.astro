@@ -4,7 +4,7 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import ProductCard from "../../components/ProductCard.astro";
 import { products, statusLabel, statusColor } from "../../data/products";
-import { discordUrl } from "../../data/site";
+import { hydrovaultDiscordUrl } from "../../data/site";
 
 const product = products.find((p) => p.id === "hydrovault")!;
 const otherProducts = products.filter((p) => p.id !== "hydrovault");
@@ -118,7 +118,7 @@ const jsonLd = {
                 {product.cta.label} <span aria-hidden="true" class="ml-1.5">→</span>
               </a>
               <a
-                href={discordUrl}
+                href={hydrovaultDiscordUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-sm text-ink-muted transition-colors hover:text-ink hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
@@ -249,7 +249,7 @@ const jsonLd = {
               {product.cta.label} <span aria-hidden="true">→</span>
             </a>
             <a
-              href={discordUrl}
+              href={hydrovaultDiscordUrl}
               target="_blank"
               rel="noopener noreferrer"
               class="rounded text-sm font-medium text-ink-muted hover:text-ink hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"

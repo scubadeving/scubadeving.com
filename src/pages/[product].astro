@@ -4,7 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { products, statusLabel, statusColor } from "../data/products";
-import { betaEmail, discordUrl } from "../data/site";
+import { betaEmail } from "../data/site";
 
 export const getStaticPaths = (() => {
   return products.map((product) => ({
@@ -109,7 +109,7 @@ const jsonLd = {
             {product.cta.label} <span aria-hidden="true">→</span>
           </a>
           <a
-            href={discordUrl}
+            href={product.discordUrl}
             target="_blank"
             rel="noopener noreferrer"
             class="rounded text-sm font-medium text-ink-muted hover:text-ink hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
