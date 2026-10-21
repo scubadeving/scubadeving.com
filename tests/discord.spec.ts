@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { discordUrl, hydrovaultDiscordUrl, looplogicDiscordUrl } from "../src/data/site";
+import { isSitemapPage } from "../src/data/sitemap";
 
 const redirects = [
   { path: "/discord", target: discordUrl, channel: "#introductions" },
@@ -34,8 +35,11 @@ for (const { path, target, channel } of redirects) {
   });
 }
 
-test("the redirect pages are not in the sitemap", async ({ request }) => {
-  const sitemap = await (await request.get("/sitemap-0.xml")).text();
-
-  expect(sitemap).not.toContain("/discord");
+test("the redirect pages are filtered out of the sitemap and real pages are kept", () => {
+  for (const { path } of redirects) {
+    expect(isSitemapPage(`https://scubadeving.com${path}/`)).toBe(false);
+  }
+  for (const path of ["/", "/looplogic/", "/looplogic/privacy/", "/hydrovault/support/"]) {
+    expect(isSitemapPage(`https://scubadeving.com${path}`)).toBe(true);
+  }
 });
