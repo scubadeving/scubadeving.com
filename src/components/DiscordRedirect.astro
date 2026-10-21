@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+interface Props {
+  url: string;
+  channel: string;
+}
+
+const { url, channel } = Astro.props;
+---
+
+<Layout
+  title="Join the scubadeving Discord"
+  description="Taking you to the scubadeving Discord server."
+  noIndex
+>
+  <meta slot="head" http-equiv="refresh" content={`0; url=${url}`} />
+  <main class="mx-auto max-w-4xl px-6 py-24">
+    <h1 class="text-2xl font-semibold tracking-tight text-ink">Taking you to Discord</h1>
+    <p class="mt-4 text-sm leading-relaxed text-ink-muted">
+      You are being sent to {channel} on the scubadeving Discord server. If nothing happens,
+      <a
+        href={url}
+        class="rounded text-accent underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >join the server</a
+      >.
+    </p>
+  </main>
+</Layout>
