@@ -2,7 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
-import { discordUrl, supportEmail } from "../../data/site";
+import { hydrovaultDiscordUrl, supportEmail } from "../../data/site";
 ---
 
 <Layout
@@ -47,7 +47,7 @@ import { discordUrl, supportEmail } from "../../data/site";
             development progress in real time.
           </p>
           <a
-            href={discordUrl}
+            href={hydrovaultDiscordUrl}
             target="_blank"
             rel="noopener noreferrer"
             class="mt-4 inline-block rounded text-sm font-medium text-accent hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"

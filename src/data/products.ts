@@ -1,3 +1,5 @@
+import { hydrovaultDiscordUrl, looplogicDiscordUrl } from "./site";
+
 export type ProductStatus = "in-development" | "coming-soon" | "available";
 
 export interface Feature {
@@ -14,6 +16,8 @@ export interface ProductCta {
 
 export interface Product {
   id: string;
+  /** Invite to this product's feedback channel on Discord */
+  discordUrl: string;
   name: string;
   tagline: string;
   /** Short copy for the homepage card */
@@ -47,6 +51,7 @@ export const statusColor: Record<ProductStatus, string> = {
 export const products: Product[] = [
   {
     id: "looplogic",
+    discordUrl: looplogicDiscordUrl,
     name: "LoopLogic",
     tagline: "CCR operations & analytics",
     cardDescription:
@@ -110,6 +115,7 @@ export const products: Product[] = [
   },
   {
     id: "hydrovault",
+    discordUrl: hydrovaultDiscordUrl,
     name: "HydroVault",
     tagline: "scuba cylinder management",
     cardDescription:

@@ -1,4 +1,6 @@
-export const discordUrl = "https://discord.gg/faFEbYZtX";
+export const discordUrl = "https://discord.gg/es66xB8sGu"; // #introductions: the footer and /discord
+export const looplogicDiscordUrl = "https://discord.gg/wBY8jpnjUK"; // #looplogic-feedback
+export const hydrovaultDiscordUrl = "https://discord.gg/z77975UVVf"; // #hydrovault-feedback
 export const githubOrgUrl = "https://github.com/scubadeving";
 
 export const helloEmail = "hello@scubadeving.com";
