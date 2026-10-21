@@ -1,4 +1,4 @@
-import { discordUrl, hydrovaultDiscordUrl } from "./site";
+import { hydrovaultDiscordUrl, looplogicDiscordUrl } from "./site";
 
 export type ProductStatus = "in-development" | "coming-soon" | "available";
 
@@ -51,7 +51,7 @@ export const statusColor: Record<ProductStatus, string> = {
 export const products: Product[] = [
   {
     id: "looplogic",
-    discordUrl,
+    discordUrl: looplogicDiscordUrl,
     name: "LoopLogic",
     tagline: "CCR operations & analytics",
     cardDescription:
